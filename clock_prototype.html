@@ -24,10 +24,18 @@
 		<script type="module">
 
 			import * as THREE from 'three';
+			import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+			import Stats from 'three/addons/libs/stats.module.js';
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+			let stats;
 			let camera, scene, renderer, controls;
 			let hours_pivot, minutes_pivot, seconds_pivot;
+
+			const API = {
+				color: 0xffffff, // sRGB
+				exposure: 1.0
+			};
 
 			init();
 			animate();
@@ -106,7 +114,29 @@
 
 				document.body.appendChild( renderer.domElement );
 
-				//
+
+				// gui
+				const gui = new GUI();
+
+				gui.addColor( API, 'color' )
+					.listen()
+					.onChange( function () {
+
+						mesh.material.color.set( API.color ).convertSRGBToLinear();
+
+					} );
+
+				gui.add( API, 'exposure', 0, 2 )
+					.onChange( function () {
+
+						renderer.toneMappingExposure = API.exposure;
+
+					} );
+
+				gui.domElement.style.webkitUserSelect = 'none';
+
+				stats = new Stats();
+				document.body.appendChild( stats.dom );
 
 				window.addEventListener( 'resize', onWindowResize );
 
@@ -130,6 +160,7 @@
 				seconds_pivot.rotation.z = -(((new Date()).getTime() / 1000) / 60) * (Math.PI * 2);				
 
 				renderer.render( scene, camera );
+				stats.update();
 
 			}
 
