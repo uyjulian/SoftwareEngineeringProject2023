@@ -33,8 +33,10 @@
 			let hours_pivot, minutes_pivot, seconds_pivot;
 
 			const API = {
-				color: 0xffffff, // sRGB
-				exposure: 1.0
+				// color: 0xffffff, // sRGB
+				hour_offset: 0.0,
+				minute_offset: 0.0,
+				second_offset: 0.0
 			};
 
 			init();
@@ -118,18 +120,32 @@
 				// gui
 				const gui = new GUI();
 
-				gui.addColor( API, 'color' )
-					.listen()
+				// gui.addColor( API, 'color' )
+				// 	.listen()
+				// 	.onChange( function () {
+
+				// 		mesh.material.color.set( API.color ).convertSRGBToLinear();
+
+				// 	} );
+
+				gui.add( API, 'hour_offset', -12, 12 )
 					.onChange( function () {
 
-						mesh.material.color.set( API.color ).convertSRGBToLinear();
+						renderer.toneMappingExposure = API.hour_offset;
 
 					} );
 
-				gui.add( API, 'exposure', 0, 2 )
+				gui.add( API, 'minute_offset', -60, 60 )
 					.onChange( function () {
 
-						renderer.toneMappingExposure = API.exposure;
+						renderer.toneMappingExposure = API.minute_offset;
+
+					} );
+
+				gui.add( API, 'second_offset', -60, 60 )
+					.onChange( function () {
+
+						renderer.toneMappingExposure = API.second_offset;
 
 					} );
 
@@ -155,9 +171,9 @@
 
 				requestAnimationFrame( animate );
 
-				hours_pivot.rotation.z = -(((new Date()).getHours() / 12)) * (Math.PI * 2);
-				minutes_pivot.rotation.z = -(((new Date()).getMinutes()) / 60) * (Math.PI * 2);
-				seconds_pivot.rotation.z = -(((new Date()).getTime() / 1000) / 60) * (Math.PI * 2);				
+				hours_pivot.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
+				minutes_pivot.rotation.z = -((((new Date()).getMinutes() + API.minute_offset) / 60)) * (Math.PI * 2);
+				seconds_pivot.rotation.z = -(((((new Date()).getTime() / 1000) + API.second_offset) / 60)) * (Math.PI * 2);				
 
 				renderer.render( scene, camera );
 				stats.update();
