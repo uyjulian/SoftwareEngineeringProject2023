@@ -33,7 +33,7 @@
 			let hours_pivot, minutes_pivot, seconds_pivot;
 
 			const API = {
-				color: 0xffffff, // sRGB
+				color: 0x0000ff, // sRGB
 				hour_offset: 0.0,
 				minute_offset: 0.0,
 				second_offset: 0.0
@@ -46,23 +46,23 @@
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.z = 400;
-				var meshtest;
 
 
 
 				scene = new THREE.Scene();
 
 				{
-					
-					
-					const geometry = new THREE.BoxGeometry( 20, 100, 20 );
-					const material = new THREE.MeshBasicMaterial( { color: 0x0000FF } );
+					hours_pivot = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 20, 100, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0x0000FF } );
 
-					meshtest = new THREE.Mesh( geometry, material );
-					meshtest.position.y = 50;
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_pivot.add(mesh);
+						mesh.position.y = 50;
 					}
 
-					scene.add( meshtest );
+					scene.add( hours_pivot );
 				}
 
 				{
@@ -143,8 +143,12 @@
 					
 				gui.addColor( API, 'color' )
 				 	.onChange( function () {
-				 		meshtest.material.color.setHEX(API.color);
+				 		const geometry = new THREE.BoxGeometry( 20, 100, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: API.color } );
 
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_pivot.add(mesh);
+						mesh.position.y = 50;
 				 	} );
 					
 
@@ -170,7 +174,7 @@
 
 				requestAnimationFrame( animate );
 
-				meshtest.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
+				hours_pivot.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
 				minutes_pivot.rotation.z = -((((new Date()).getMinutes() + API.minute_offset) / 60)) * (Math.PI * 2);
 				seconds_pivot.rotation.z = -(((((new Date()).getTime() / 1000) + API.second_offset) / 60)) * (Math.PI * 2);				
 
