@@ -120,12 +120,6 @@
 				// gui
 				const gui = new GUI();
 
-				gui.addColor( API, 'color' )
-				 	.onChange( function () {
-				 		hours_pivot.material.color.setHEX( API.color );
-
-				 	} );
-
 				gui.add( API, 'hour_offset', -12, 12 )
 					.onChange( function () {
 
@@ -146,6 +140,12 @@
 						renderer.toneMappingExposure = API.second_offset;
 
 					} );
+					
+				gui.addColor( API, 'color' )
+				 	.onChange( function () {
+				 		hours_pivot.material.color.setHEX( API.color );
+
+				 	} );
 					
 
 				gui.domElement.style.webkitUserSelect = 'none';
