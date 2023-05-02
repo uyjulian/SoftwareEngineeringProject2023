@@ -120,13 +120,11 @@
 				// gui
 				const gui = new GUI();
 
-				// gui.addColor( API, 'color' )
-				// 	.listen()
-				// 	.onChange( function () {
+				gui.addColor( API, 'color' )
+				 	.onChange( function () {
+				 		hours_pivot.material.color.setHEX( API.color );
 
-				// 		mesh.material.color.set( API.color ).convertSRGBToLinear();
-
-				// 	} );
+				 	} );
 
 				gui.add( API, 'hour_offset', -12, 12 )
 					.onChange( function () {
@@ -148,6 +146,7 @@
 						renderer.toneMappingExposure = API.second_offset;
 
 					} );
+					
 
 				gui.domElement.style.webkitUserSelect = 'none';
 
