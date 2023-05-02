@@ -143,7 +143,12 @@
 					
 				gui.addColor( API, 'color' )
 				 	.onChange( function () {
-				 		mesh.material.color.setHEX(API.color);
+				 		const geometry = new THREE.BoxGeometry( 20, 100, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0x0000FF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_pivot.add(mesh);
+						mesh.position.y = 50;
 
 				 	} );
 					
