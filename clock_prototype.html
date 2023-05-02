@@ -30,13 +30,16 @@
 
 			let stats;
 			let camera, scene, renderer, controls;
-			let hours_pivot, minutes_pivot, seconds_pivot;
+			let hours_pivot, minutes_pivot, seconds_pivot, hours_marker1, hours_marker2, hours_marker3, hours_marker4,
+			hours_marker5, hours_marker6, hours_marker7, hours_marker8, hours_marker9, hours_marker10,
+			hours_marker11, hours_marker12;
 			var hourTimer, minuteTimer, secondTimer; 
 
 			const API = {
 				hour_color: 0x0000ff,
 				minute_color: 0x00ff00,				// sRGB
 				second_color: 0xff0000,
+				hour_marker: 0xffffff,
 				hour_offset: 0.0,
 				minute_offset: 0.0,
 				second_offset: 0.0,
@@ -58,6 +61,151 @@
 				scene = new THREE.Scene();
 
 				{
+					hours_marker1 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker1.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker1 );
+					hours_marker1.rotation.z =  - (Math.PI * 2) / 12;
+
+					hours_marker2 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker2.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker2 );
+					hours_marker2.rotation.z = (- (Math.PI * 2) / 12) * 2;
+
+					hours_marker3 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker3.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker3 );
+					hours_marker3.rotation.z = (- (Math.PI * 2) / 12) * 3;
+
+					hours_marker4 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker4.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker4 );
+					hours_marker4.rotation.z = (- (Math.PI * 2) / 12) * 4;
+
+					hours_marker5 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker5.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker5 );
+					hours_marker5.rotation.z = (- (Math.PI * 2) / 12) * 5;
+
+					hours_marker6 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker6.add(mesh);
+						mesh.position.y = -150;
+					}
+					scene.add( hours_marker6 );
+
+					hours_marker11 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker11.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker11 );
+					hours_marker11.rotation.z = (Math.PI * 2) / 12;
+
+					hours_marker10 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker10.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker10 );
+					hours_marker10.rotation.z = ((Math.PI * 2) / 12) * 2;
+
+					hours_marker9 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker9.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker9 );
+					hours_marker9.rotation.z = ((Math.PI * 2) / 12) * 3;
+
+					hours_marker8 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker8.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker8 );
+					hours_marker8.rotation.z = ((Math.PI * 2) / 12) * 4;
+
+					hours_marker7 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker7.add(mesh);
+						mesh.position.y = 150;
+					}
+					scene.add( hours_marker7 );
+					hours_marker7.rotation.z = ((Math.PI * 2) / 12) * 5;
+
+					hours_marker12 = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_marker12.add(mesh);
+						mesh.position.y = 150;
+					}
+
+					scene.add( hours_marker12 );
+
+
+					
 					hours_pivot = new THREE.Object3D();
 					{
 						const geometry = new THREE.BoxGeometry( 20, 100, 20 );
@@ -180,6 +328,50 @@
 						mesh.position.y = 100;
 
 				 	} );
+
+				gui.addColor( API, 'hour_marker' ).name('Hour Markers Color')
+				 	.onChange( function () {
+				 		const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+						const material = new THREE.MeshBasicMaterial( { color: API.hour_marker } );
+
+						const mesh1 = new THREE.Mesh( geometry, material );
+						hours_marker1.add(mesh1);
+						mesh1.position.y = 150;
+						const mesh2 = new THREE.Mesh( geometry, material );
+						hours_marker2.add(mesh2);
+						mesh2.position.y = 150;
+						const mesh3 = new THREE.Mesh( geometry, material );
+						hours_marker3.add(mesh3);
+						mesh3.position.y = 150;
+						const mesh4 = new THREE.Mesh( geometry, material );
+						hours_marker4.add(mesh4);
+						mesh4.position.y = 150;
+						const mesh5 = new THREE.Mesh( geometry, material );
+						hours_marker5.add(mesh5);
+						mesh5.position.y = 150;
+						const mesh6 = new THREE.Mesh( geometry, material );
+						hours_marker6.add(mesh6);
+						mesh6.position.y = -150;
+						const mesh7 = new THREE.Mesh( geometry, material );
+						hours_marker7.add(mesh7);
+						mesh7.position.y = 150;
+						const mesh8 = new THREE.Mesh( geometry, material );
+						hours_marker8.add(mesh8);
+						mesh8.position.y = 150;
+						const mesh9 = new THREE.Mesh( geometry, material );
+						hours_marker9.add(mesh9);
+						mesh9.position.y = 150;
+						const mesh10 = new THREE.Mesh( geometry, material );
+						hours_marker10.add(mesh10);
+						mesh10.position.y = 150;
+						const mesh11 = new THREE.Mesh( geometry, material );
+						hours_marker11.add(mesh11);
+						mesh11.position.y = 150;
+						const mesh12 = new THREE.Mesh( geometry, material );
+						hours_marker12.add(mesh12);
+						mesh12.position.y = 150;
+
+				 	} );
 					
 			    gui.add(API, 'hour');
 				gui.add(API, 'minute');
@@ -200,52 +392,170 @@
 									if(j % 2 == 1){
 										const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
 										const material1 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
-										const mesh1 = new THREE.Mesh( geometry1, material1 );
-										hours_pivot.add(mesh1);
-										mesh1.position.y = 50;
+										const meshH = new THREE.Mesh( geometry1, material1 );
+										hours_pivot.add(meshH);
+										meshH.position.y = 50;
 										const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
 										const material2 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
-										const mesh2 = new THREE.Mesh( geometry2, material2 );
-										minutes_pivot.add(mesh2);
-										mesh2.position.y = 75;
+										const meshM = new THREE.Mesh( geometry2, material2 );
+										minutes_pivot.add(meshM);
+										meshM.position.y = 75;
 										const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
 										const material3 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
-										const mesh3 = new THREE.Mesh( geometry3, material3 );
-										seconds_pivot.add(mesh3);
-										mesh3.position.y = 100;
+										const meshS = new THREE.Mesh( geometry3, material3 );
+										seconds_pivot.add(meshS);
+										meshS.position.y = 100;
+										const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+										const material = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
+
+										const mesh1 = new THREE.Mesh( geometry, material );
+										hours_marker1.add(mesh1);
+										mesh1.position.y = 150;
+										const mesh2 = new THREE.Mesh( geometry, material );
+										hours_marker2.add(mesh2);
+										mesh2.position.y = 150;
+										const mesh3 = new THREE.Mesh( geometry, material );
+										hours_marker3.add(mesh3);
+										mesh3.position.y = 150;
+										const mesh4 = new THREE.Mesh( geometry, material );
+										hours_marker4.add(mesh4);
+										mesh4.position.y = 150;
+										const mesh5 = new THREE.Mesh( geometry, material );
+										hours_marker5.add(mesh5);
+										mesh5.position.y = 150;
+										const mesh6 = new THREE.Mesh( geometry, material );
+										hours_marker6.add(mesh6);
+										mesh6.position.y = -150;
+										const mesh7 = new THREE.Mesh( geometry, material );
+										hours_marker7.add(mesh7);
+										mesh7.position.y = 150;
+										const mesh8 = new THREE.Mesh( geometry, material );
+										hours_marker8.add(mesh8);
+										mesh8.position.y = 150;
+										const mesh9 = new THREE.Mesh( geometry, material );
+										hours_marker9.add(mesh9);
+										mesh9.position.y = 150;
+										const mesh10 = new THREE.Mesh( geometry, material );
+										hours_marker10.add(mesh10);
+										mesh10.position.y = 150;
+										const mesh11 = new THREE.Mesh( geometry, material );
+										hours_marker11.add(mesh11);
+										mesh11.position.y = 150;
+										const mesh12 = new THREE.Mesh( geometry, material );
+										hours_marker12.add(mesh12);
+										mesh12.position.y = 150;
 									}else{
 										const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
 										const material1 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
-										const mesh1 = new THREE.Mesh( geometry1, material1 );
-										hours_pivot.add(mesh1);
-										mesh1.position.y = 50;
+										const meshH = new THREE.Mesh( geometry1, material1 );
+										hours_pivot.add(meshH);
+										meshH.position.y = 50;
 										const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
 										const material2 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
-										const mesh2 = new THREE.Mesh( geometry2, material2 );
-										minutes_pivot.add(mesh2);
-										mesh2.position.y = 75;
+										const meshM = new THREE.Mesh( geometry2, material2 );
+										minutes_pivot.add(meshM);
+										meshM.position.y = 75;
 										const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
 										const material3 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
-										const mesh3 = new THREE.Mesh( geometry3, material3 );
-										seconds_pivot.add(mesh3);
-										mesh3.position.y = 100;
+										const meshS = new THREE.Mesh( geometry3, material3 );
+										seconds_pivot.add(meshS);
+										meshS.position.y = 100;
+										const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+										const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+										const mesh1 = new THREE.Mesh( geometry, material );
+										hours_marker1.add(mesh1);
+										mesh1.position.y = 150;
+										const mesh2 = new THREE.Mesh( geometry, material );
+										hours_marker2.add(mesh2);
+										mesh2.position.y = 150;
+										const mesh3 = new THREE.Mesh( geometry, material );
+										hours_marker3.add(mesh3);
+										mesh3.position.y = 150;
+										const mesh4 = new THREE.Mesh( geometry, material );
+										hours_marker4.add(mesh4);
+										mesh4.position.y = 150;
+										const mesh5 = new THREE.Mesh( geometry, material );
+										hours_marker5.add(mesh5);
+										mesh5.position.y = 150;
+										const mesh6 = new THREE.Mesh( geometry, material );
+										hours_marker6.add(mesh6);
+										mesh6.position.y = -150;
+										const mesh7 = new THREE.Mesh( geometry, material );
+										hours_marker7.add(mesh7);
+										mesh7.position.y = 150;
+										const mesh8 = new THREE.Mesh( geometry, material );
+										hours_marker8.add(mesh8);
+										mesh8.position.y = 150;
+										const mesh9 = new THREE.Mesh( geometry, material );
+										hours_marker9.add(mesh9);
+										mesh9.position.y = 150;
+										const mesh10 = new THREE.Mesh( geometry, material );
+										hours_marker10.add(mesh10);
+										mesh10.position.y = 150;
+										const mesh11 = new THREE.Mesh( geometry, material );
+										hours_marker11.add(mesh11);
+										mesh11.position.y = 150;
+										const mesh12 = new THREE.Mesh( geometry, material );
+										hours_marker12.add(mesh12);
+										mesh12.position.y = 150;
+										
 									}
 								}else{
 									const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
 									const material1 = new THREE.MeshBasicMaterial( { color: API.hour_color } );
-									const mesh1 = new THREE.Mesh( geometry1, material1 );
-									hours_pivot.add(mesh1);
-									mesh1.position.y = 50;
+									const meshH = new THREE.Mesh( geometry1, material1 );
+									hours_pivot.add(meshH);
+									meshH.position.y = 50;
 									const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
 									const material2 = new THREE.MeshBasicMaterial( { color: API.minute_color } );
-									const mesh2 = new THREE.Mesh( geometry2, material2 );
-									minutes_pivot.add(mesh2);
-									mesh2.position.y = 75;
+									const meshM = new THREE.Mesh( geometry2, material2 );
+									minutes_pivot.add(meshM);
+									meshM.position.y = 75;
 									const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
 									const material3 = new THREE.MeshBasicMaterial( { color: API.second_color } );
-									const mesh3 = new THREE.Mesh( geometry3, material3 );
-									seconds_pivot.add(mesh3);
-									mesh3.position.y = 100;
+									const meshS = new THREE.Mesh( geometry3, material3 );
+									seconds_pivot.add(meshS);
+									meshS.position.y = 100;
+									const geometry = new THREE.BoxGeometry( 10, 50, 20 );
+									const material = new THREE.MeshBasicMaterial( { color: API.hour_marker } );
+
+									const mesh1 = new THREE.Mesh( geometry, material );
+									hours_marker1.add(mesh1);
+									mesh1.position.y = 150;
+									const mesh2 = new THREE.Mesh( geometry, material );
+									hours_marker2.add(mesh2);
+									mesh2.position.y = 150;
+									const mesh3 = new THREE.Mesh( geometry, material );
+									hours_marker3.add(mesh3);
+									mesh3.position.y = 150;
+									const mesh4 = new THREE.Mesh( geometry, material );
+									hours_marker4.add(mesh4);
+									mesh4.position.y = 150;
+									const mesh5 = new THREE.Mesh( geometry, material );
+									hours_marker5.add(mesh5);
+									mesh5.position.y = 150;
+									const mesh6 = new THREE.Mesh( geometry, material );
+									hours_marker6.add(mesh6);
+									mesh6.position.y = -150;
+									const mesh7 = new THREE.Mesh( geometry, material );
+									hours_marker7.add(mesh7);
+									mesh7.position.y = 150;
+									const mesh8 = new THREE.Mesh( geometry, material );
+									hours_marker8.add(mesh8);
+									mesh8.position.y = 150;
+									const mesh9 = new THREE.Mesh( geometry, material );
+									hours_marker9.add(mesh9);
+									mesh9.position.y = 150;
+									const mesh10 = new THREE.Mesh( geometry, material );
+									hours_marker10.add(mesh10);
+									mesh10.position.y = 150;
+									const mesh11 = new THREE.Mesh( geometry, material );
+									hours_marker11.add(mesh11);
+									mesh11.position.y = 150;
+									const mesh12 = new THREE.Mesh( geometry, material );
+									hours_marker12.add(mesh12);
+									mesh12.position.y = 150;
 									clearInterval(x);
 									clearInterval(y);
 								}
