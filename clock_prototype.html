@@ -170,7 +170,7 @@
 
 				requestAnimationFrame( animate );
 
-				hours_pivot.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
+				meshtest.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
 				minutes_pivot.rotation.z = -((((new Date()).getMinutes() + API.minute_offset) / 60)) * (Math.PI * 2);
 				seconds_pivot.rotation.z = -(((((new Date()).getTime() / 1000) + API.second_offset) / 60)) * (Math.PI * 2);				
 
