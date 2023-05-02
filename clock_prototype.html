@@ -31,15 +31,18 @@
 			let stats;
 			let camera, scene, renderer, controls;
 			let hours_pivot, minutes_pivot, seconds_pivot;
+			var hourTimer, minuteTimer, secondTimer; 
 
 			const API = {
 				hour_color: 0x0000ff,
 				minute_color: 0x00ff00,				// sRGB
 				second_color: 0xff0000,
-				alarm: 0xff0000,
 				hour_offset: 0.0,
 				minute_offset: 0.0,
 				second_offset: 0.0,
+				hour: 0,
+				minute: 0,
+				second: 0,
 			};
 
 			init();
@@ -123,28 +126,28 @@
 				// gui
 				const gui = new GUI();
 
-				gui.add( API, 'hour_offset', -12, 12 )
+				gui.add( API, 'hour_offset', -12, 12 ).name('Hour Offset')
 					.onChange( function () {
 
 						renderer.toneMappingExposure = API.hour_offset;
 
 					} );
 
-				gui.add( API, 'minute_offset', -60, 60 )
+				gui.add( API, 'minute_offset', -60, 60 ).name('Minute Offset')
 					.onChange( function () {
 
 						renderer.toneMappingExposure = API.minute_offset;
 
 					} );
 
-				gui.add( API, 'second_offset', -60, 60 )
+				gui.add( API, 'second_offset', -60, 60 ).name('Second Offset')
 					.onChange( function () {
 
 						renderer.toneMappingExposure = API.second_offset;
 
 					} );
 					
-				gui.addColor( API, 'hour_color' )
+				gui.addColor( API, 'hour_color' ).name('Hour Hand Color')
 				 	.onChange( function () {
 				 		const geometry = new THREE.BoxGeometry( 20, 100, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: API.hour_color } );
@@ -156,7 +159,7 @@
 				 	} );
 					
 					
-				gui.addColor( API, 'minute_color' )
+				gui.addColor( API, 'minute_color' ).name('Minute Hand Color')
 				 	.onChange( function () {
 				 		const geometry = new THREE.BoxGeometry( 20, 150, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: API.minute_color } );
@@ -167,7 +170,7 @@
 
 				 	} );
 					
-				gui.addColor( API, 'second_color' )
+				gui.addColor( API, 'second_color' ).name('Second Hand Color')
 				 	.onChange( function () {
 				 		const geometry = new THREE.BoxGeometry( 20, 200, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: API.second_color } );
@@ -178,16 +181,80 @@
 
 				 	} );
 					
-				gui.addColor( API, 'alarm' )
-				 	.onChange( function () {
-				 		const geometry = new THREE.BoxGeometry( 20, 200, 20 );
-						const material = new THREE.MeshBasicMaterial( { color: API.second_color } );
+			    gui.add(API, 'hour');
+				gui.add(API, 'minute');
+				gui.add(API, 'second');
+				var obj = { Start_Timer:function(){ 
+					hourTimer = API.hour;
+					minuteTimer = API.minute;
+					secondTimer = API.second;
+					var sec = (hourTimer * 60 * 60) + (minuteTimer * 60) + (secondTimer);
+					let i = 0;
+					var x = setInterval(function(){
+						i++;
+						if(i == sec){
+							let j = 0;
+							var y = setInterval(function(){
+								j++;
+								if(j < 10){
+									if(j % 2 == 1){
+										const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
+										const material1 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
+										const mesh1 = new THREE.Mesh( geometry1, material1 );
+										hours_pivot.add(mesh1);
+										mesh1.position.y = 50;
+										const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
+										const material2 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
+										const mesh2 = new THREE.Mesh( geometry2, material2 );
+										minutes_pivot.add(mesh2);
+										mesh2.position.y = 75;
+										const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
+										const material3 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
+										const mesh3 = new THREE.Mesh( geometry3, material3 );
+										seconds_pivot.add(mesh3);
+										mesh3.position.y = 100;
+									}else{
+										const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
+										const material1 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+										const mesh1 = new THREE.Mesh( geometry1, material1 );
+										hours_pivot.add(mesh1);
+										mesh1.position.y = 50;
+										const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
+										const material2 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+										const mesh2 = new THREE.Mesh( geometry2, material2 );
+										minutes_pivot.add(mesh2);
+										mesh2.position.y = 75;
+										const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
+										const material3 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+										const mesh3 = new THREE.Mesh( geometry3, material3 );
+										seconds_pivot.add(mesh3);
+										mesh3.position.y = 100;
+									}
+								}else{
+									const geometry1 = new THREE.BoxGeometry( 20, 100, 20 );
+									const material1 = new THREE.MeshBasicMaterial( { color: API.hour_color } );
+									const mesh1 = new THREE.Mesh( geometry1, material1 );
+									hours_pivot.add(mesh1);
+									mesh1.position.y = 50;
+									const geometry2 = new THREE.BoxGeometry( 20, 150, 20 );
+									const material2 = new THREE.MeshBasicMaterial( { color: API.minute_color } );
+									const mesh2 = new THREE.Mesh( geometry2, material2 );
+									minutes_pivot.add(mesh2);
+									mesh2.position.y = 75;
+									const geometry3 = new THREE.BoxGeometry( 20, 200, 20 );
+									const material3 = new THREE.MeshBasicMaterial( { color: API.second_color } );
+									const mesh3 = new THREE.Mesh( geometry3, material3 );
+									seconds_pivot.add(mesh3);
+									mesh3.position.y = 100;
+									clearInterval(x);
+									clearInterval(y);
+								}
+							},500)	
+						}
+					}, 1000);
+				}};
 
-						const mesh = new THREE.Mesh( geometry, material );
-						seconds_pivot.add(mesh);
-						mesh.position.y = 100;
-
-				 	} );	
+				gui.add(obj,'Start_Timer').name('Start Timer');
 					
 
 				gui.domElement.style.webkitUserSelect = 'none';
