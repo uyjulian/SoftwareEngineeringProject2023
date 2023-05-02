@@ -144,7 +144,7 @@
 				gui.addColor( API, 'color' )
 				 	.onChange( function () {
 				 		const geometry = new THREE.BoxGeometry( 20, 100, 20 );
-						const material = new THREE.MeshBasicMaterial( { color: 0x0000FF } );
+						const material = new THREE.MeshBasicMaterial( { color: API.color } );
 
 						const mesh = new THREE.Mesh( geometry, material );
 						hours_pivot.add(mesh);
