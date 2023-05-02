@@ -57,9 +57,9 @@
 						const geometry = new THREE.BoxGeometry( 20, 100, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: 0x0000FF } );
 
-						mesh1 = new THREE.Mesh( geometry, material );
-						hours_pivot.add(mesh1);
-						mesh1.position.y = 50;
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_pivot.add(mesh);
+						mesh.position.y = 50;
 					}
 
 					scene.add( hours_pivot );
@@ -143,7 +143,17 @@
 					
 				gui.addColor( API, 'color' )
 				 	.onChange( function () {
-				 		mesh1.material.color.setHEX(dec2hex(API.color));
+				 		hours_pivot = new THREE.Object3D();
+					{
+						const geometry = new THREE.BoxGeometry( 20, 100, 20 );
+						const material = new THREE.MeshBasicMaterial( { API.color } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						hours_pivot.add(mesh);
+						mesh.position.y = 50;
+					}
+
+					scene.add( hours_pivot );
 
 				 	} );
 					
