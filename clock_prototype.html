@@ -33,7 +33,7 @@
 			let hours_pivot, minutes_pivot, seconds_pivot;
 
 			const API = {
-				color: 0xffffff, // sRGB
+				color: 0x0000FF, // sRGB
 				hour_offset: 0.0,
 				minute_offset: 0.0,
 				second_offset: 0.0
@@ -143,7 +143,7 @@
 					
 				gui.addColor( API, 'color' )
 				 	.onChange( function () {
-				 		hours_pivot.material.color.setHEX(dec2hex(API.color));
+				 		mesh1.material.color.setHEX(dec2hex(API.color));
 
 				 	} );
 					
