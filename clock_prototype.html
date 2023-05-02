@@ -120,13 +120,13 @@
 				// gui
 				const gui = new GUI();
 
-				gui.addColor( API, 'color' )
-				 	.listen()
-				 	.onChange( function () {
+				// gui.addColor( API, 'color' )
+				// 	.listen()
+				// 	.onChange( function () {
 
-				 		mesh.material.color.set( API.color ).convertSRGBToLinear();
+				// 		mesh.material.color.set( API.color ).convertSRGBToLinear();
 
-					} );
+				// 	} );
 
 				gui.add( API, 'hour_offset', -12, 12 )
 					.onChange( function () {
