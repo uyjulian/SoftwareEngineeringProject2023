@@ -70,7 +70,7 @@
 				{
 					minutes_pivot = new THREE.Object3D();
 					{
-						const geometry = new THREE.BoxGeometry( 20, 150, 20 );
+						const geometry = new THREE.BoxGeometry( 20, 200, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: 0x00FF00 } );
 
 						const mesh = new THREE.Mesh( geometry, material );
@@ -156,12 +156,12 @@
 					
 				gui.addColor( API, 'minute_color' )
 				 	.onChange( function () {
-				 		const geometry = new THREE.BoxGeometry( 20, 150, 20 );
+				 		const geometry = new THREE.BoxGeometry( 20, 200, 20 );
 						const material = new THREE.MeshBasicMaterial( { color: API.minute_color } );
 
 						const mesh = new THREE.Mesh( geometry, material );
 						minutes_pivot.add(mesh);
-						mesh.position.y = 50;
+						mesh.position.y = 100;
 
 				 	} );
 					
@@ -172,7 +172,7 @@
 
 						const mesh = new THREE.Mesh( geometry, material );
 						seconds_pivot.add(mesh);
-						mesh.position.y = 50;
+						mesh.position.y = 100;
 
 				 	} );
 					
