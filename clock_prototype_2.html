@@ -39,9 +39,11 @@
 				second_offset: 0.0,
 			};
 
+			let orb_containers;
 			let crystal_containers;
 			let crystal_waters;
 
+			orb_containers = [];
 			crystal_containers = [];
 			crystal_waters = [];
 
@@ -60,7 +62,7 @@
 					var crystal_container = new THREE.Object3D();
 					var crystal_container_2 = new THREE.Object3D();
 					crystal_container.add(crystal_container_2);
-					crystal_container_2.position.y = 140;
+					crystal_container_2.position.y = 200;
 					{
 						const geometry = new THREE.BoxGeometry( 20, 200, 20 );
 						const wiregeometry = new THREE.WireframeGeometry( geometry );
@@ -79,6 +81,25 @@
 					scene.add( crystal_container );
 
 					crystal_containers.push(crystal_container);
+				}
+
+				for (var i = 0; i < 7; i += 1)
+				{
+					var orb_container = new THREE.Object3D();
+					{
+						const geometry = new THREE.SphereGeometry( 7 );
+						const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+
+						const mesh = new THREE.Mesh( geometry, material );
+						orb_container.add(mesh);
+
+						mesh.position.x = -60;
+						
+					}
+
+					scene.add( orb_container );
+
+					orb_containers.push(orb_container);
 				}
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -152,7 +173,7 @@
 					var crystal_container = crystal_containers[i];
 
 					crystal_container.setRotationFromEuler(rot_eul)
-					crystal_container.rotateX(-sec * 0.0625 * (Math.PI * 2));
+					crystal_container.rotateY(-sec * 0.0625 * (Math.PI * 2));
 					crystal_container.rotateZ(i * ((Math.PI * 2) / 12));
 				}	
 
@@ -176,6 +197,16 @@
 					
 					mesh.position.y = (mesh.scale.y * (mesh.geometry.parameters.height / 2)) - (mesh.geometry.parameters.height / 2);
 
+				}
+
+				var rot_eul_2 = new THREE.Euler( 0, (sec*0.5 + Math.sin(sec*0.3)*0.25) * Math.PI * 2, (sec*0.5 + Math.sin(sec*0.34)*0.25) * 0.6*Math.PI, 'XYZ' );
+
+				var u = (sec/60) * Math.PI * 2;
+				for (var i = 0; i < orb_containers.length; i += 1)
+				{
+					var obj = orb_containers[i];
+					obj.setRotationFromEuler(rot_eul_2);
+					obj.rotateZ((1+i) * u);
 				}	
 
 				renderer.render( scene, camera );
