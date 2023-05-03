@@ -225,7 +225,11 @@
 				}};
 
 				gui.add(obj,'Start_Timer').name('Start Timer');
-					
+				var obj = { Switch_Clock_Style:function(){ 
+					window.location.href = './clock_prototype_2.html';
+				}};
+
+				gui.add(obj,'Switch_Clock_Style').name('Switch clock style to Fancy');
 
 				gui.domElement.style.webkitUserSelect = 'none';
 

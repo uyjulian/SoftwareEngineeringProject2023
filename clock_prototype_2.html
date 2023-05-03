@@ -113,6 +113,11 @@
 				gui.add( API, 'minute_offset', -60, 60 ).name('Minute Offset');
 
 				gui.add( API, 'second_offset', -60, 60 ).name('Second Offset');
+				var obj = { Switch_Clock_Style:function(){ 
+					window.location.href = './clock_prototype.html';
+				}};
+
+				gui.add(obj,'Switch_Clock_Style').name('Switch clock style to Simple');
 
 				gui.domElement.style.webkitUserSelect = 'none';
 
