@@ -40,7 +40,7 @@
 				minute_color: 0x00ff00,				// sRGB
 				second_color: 0xff0000,
 				hour_marker: 0xffffff,
-				hour_offset: 0.0,
+				hour_offset: (new Date()).getTimezoneOffset() / -60,
 				minute_offset: 0.0,
 				second_offset: 0.0,
 				hour: 0,
@@ -252,10 +252,14 @@
 			function animate() {
 
 				requestAnimationFrame( animate );
+				var cur_date = (new Date()); 
+				var sec = (cur_date.getTime() / 1000) + API.second_offset;
+				var min = (sec / 60) + API.minute_offset;
+				var hour = (min / 60) + API.hour_offset;
 
-				hours_pivot.rotation.z = -((((new Date()).getHours() + API.hour_offset) / 12)) * (Math.PI * 2);
-				minutes_pivot.rotation.z = -((((new Date()).getMinutes() + API.minute_offset) / 60)) * (Math.PI * 2);
-				seconds_pivot.rotation.z = -(((((new Date()).getTime() / 1000) + API.second_offset) / 60)) * (Math.PI * 2);				
+				hours_pivot.rotation.z = -((hour / 12)) * (Math.PI * 2);
+				minutes_pivot.rotation.z = -((min / 60)) * (Math.PI * 2);
+				seconds_pivot.rotation.z = -((sec / 60)) * (Math.PI * 2);				
 
 				renderer.render( scene, camera );
 				stats.update();

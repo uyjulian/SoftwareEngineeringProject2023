@@ -34,7 +34,7 @@
 			var hourTimer, minuteTimer, secondTimer; 
 
 			const API = {
-				hour_offset: 0.0,
+				hour_offset: (new Date()).getTimezoneOffset() / -60,
 				minute_offset: 0.0,
 				second_offset: 0.0,
 			};
